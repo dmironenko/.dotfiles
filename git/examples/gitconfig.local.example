@@ -1,0 +1,3 @@
+# copy to ~/.gitconfig.local
+[includeIf "gitdir:~/work/"]
+  path = ~/.config/git/work.gitconfig

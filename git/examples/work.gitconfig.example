@@ -1,0 +1,10 @@
+# copy to ~/.config/git/work.gitconfig
+[user]
+  name = Your Name
+  email = you@company.example
+  useConfigOnly = true
+
+# optional: prefer ssh
+# [url "git@git.company.example:"]
+#   insteadOf = https://git.company.example/
+#   insteadOf = ssh://git@git.company.example/

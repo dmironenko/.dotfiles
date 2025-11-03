@@ -1,0 +1,4 @@
+--no-folding
+--ignore='(^|/)(\.gitkeep|\.DS_Store|config-local\.fish|fish_variables.*|state\.yml|lazyvim\.json)$'
+--ignore='(^|/)\.config/tmux/plugins($|/)'
+--ignore='(^|/)(\.gitconfig\.local|\.gitconfig_.*|work\.gitconfig)$'

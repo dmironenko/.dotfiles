@@ -1,0 +1,14 @@
+theme = "solarized-osaka-dark"
+
+background-opacity = 0.8
+background-blur-radius = 20
+background = #031219
+
+font-family = "Fira Code"
+
+cursor-style = block
+cursor-style-blink = true
+
+macos-option-as-alt = left
+keybind = alt+left=unbind
+keybind = alt+right=unbind

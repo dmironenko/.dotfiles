@@ -1,0 +1,20 @@
+# fish
+fish/.config/fish/config-local.fish
+fish/.config/fish/fish_variables*
+
+# nvim
+nvim/.config/nvim/lazyvim.json
+
+# tmux
+tmux/.config/tmux/plugins
+
+#lazygit
+lazygit/.config/lazygit/state.yml
+
+# misc
+.DS_Store
+
+# Local Git identities (keep the real files outside this repository).
+git/.gitconfig.local
+git/.gitconfig_*
+git/work.gitconfig
