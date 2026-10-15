@@ -1,70 +1,60 @@
 # Dotfiles
 
-Install Homebrew and the system build tools first; `brew` must be on PATH.
-Then, from this directory:
+![views](https://hits.sh/github.com/dmironenko/.dotfiles.svg?style=flat&label=views&color=007ec6)
+
+My configs for Fish, Neovim (LazyVim), tmux, Ghostty, Git and lazygit.
+Managed with GNU Stow on macOS and Linux. Neovim 0.12+ is required.
+
+## Install
+
+Install Homebrew and the system build tools, then run from this directory:
 
 ```sh
 make install
 ```
 
-`make` does the same thing from bash, sh, zsh or fish. The installer installs
-Brewfile dependencies, applies Stow packages, initializes Fish
-and changes the login shell to Fish.
-Run as your user; `sudo` and `chsh` may request a password. macOS GUI packages
-are skipped on Linux.
+This installs Brewfile dependencies, links configs and sets Fish as the login
+shell. Run as your user; `sudo` and `chsh` may ask for a password. macOS GUI
+packages are skipped on Linux. If Stow reports a conflict, move the existing
+file aside and rerun. Plugins and Neovim tools install on first launch.
 
-Open programs normally. Fish installs plugins when its manifest changes;
-tmux installs missing plugins from its config at startup.
-In Neovim, lazy.nvim installs missing plugins; LazyVim configures
-Mason and Treesitter to install the tools and parsers listed in the config.
-Let the background installations finish on the first launch.
+## Update
 
-After pulling config changes on another device:
+After pulling changes:
 
 ```sh
 make sync
 ```
 
-`make sync-nvim` applies only Neovim. After pulling Neovim plugin changes, run
-`:Lazy restore` inside Neovim to apply the repository lockfile. Use `make install`
-when Brewfile changed. Fish/tmux plugin changes apply on their next startup.
-Stow creates file links without adopting local files into the repository.
-If files conflict, move them aside and rerun the command; existing files are
-never overwritten automatically.
+Use `make sync-nvim` for Neovim only, or `make install` when the Brewfile changes.
+After Neovim plugin changes, run `:Lazy restore` to apply the lockfile.
+To update plugin versions, run `:Lazy update` and commit
+`nvim/.config/nvim/lazy-lock.json`. Fish and tmux apply plugin changes on startup.
 
-Keep device-specific settings and secrets in `~/.config/fish/config-local.fish`.
-Runtime state stays outside the repository. Fish plugins are listed in
-`fish/.config/fish/fish_plugins`; Neovim plugin versions are recorded in
-`nvim/.config/nvim/lazy-lock.json`. Update them with `:Lazy update` and commit
-the lockfile. These plugins require Neovim 0.12 or newer.
+## Local settings
 
-Git uses the personal identity in `git/.gitconfig` by default, including a
-GitHub `noreply` email address for privacy. It also reads the optional
-`~/.gitconfig.local` file for machine-specific settings.
+Keep secrets and machine-specific Fish settings in
+`~/.config/fish/config-local.fish`, and private functions in
+`~/.config/fish/functions/`. Runtime state stays outside version control.
 
-To use a different identity for work repositories:
+Git defaults to my personal identity in `git/.gitconfig`; change it before
+using these configs. For a separate work identity:
 
 ```sh
 mkdir -p ~/.config/git
-# For initial setup only; preserve existing local configurations.
-cp -i examples/gitconfig.local.example ~/.gitconfig.local
-cp -i examples/work.gitconfig.example ~/.config/git/work.gitconfig
+cp -i git/examples/gitconfig.local.example ~/.gitconfig.local
+cp -i git/examples/work.gitconfig.example ~/.config/git/work.gitconfig
 chmod 600 ~/.gitconfig.local ~/.config/git/work.gitconfig
 ```
 
-Edit the name, email, and optional Git server in `~/.config/git/work.gitconfig`.
-In `~/.gitconfig.local`, set `gitdir` to the directory containing your work
-repositories, with a trailing slash. The example uses `~/work/`. For multiple
-employers or clients, add a separate conditional include and config file for
-each directory. These local files stay outside the repository and survive
-`make sync`.
+Preserve any existing local configs. Edit the name, email and optional Git
+server in `~/.config/git/work.gitconfig`. Set the work directory in
+`~/.gitconfig.local` (`~/work/` by default, with a trailing slash). Add separate
+includes for other employers or clients. These files stay outside the repo
+and survive `make sync`.
 
-Inside a personal or work repository, check the selected identity with:
+Check the active identity inside a repository:
 
 ```sh
 git config --show-origin --get user.email
-git var GIT_AUTHOR_IDENT
 ```
-
-Keep private Fish functions in `~/.config/fish/functions/` as local files,
-alongside the functions linked by Stow.
