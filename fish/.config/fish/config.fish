@@ -22,7 +22,7 @@ if status is-interactive
         set -l desired (string lower -- $plugins)
         if test "$desired" != "$_fisher_plugins"; or not test -f "$__fish_config_dir/functions/fisher.fish"
             fisher update
-            printf '%s\n' $plugins > "$__fish_config_dir/fish_plugins"
+            printf '%s\n' $plugins >"$__fish_config_dir/fish_plugins"
         end
     end
 
@@ -50,9 +50,9 @@ if status is-interactive
     end
     alias lla 'll -a'
     alias g git
-    if type -q nvim
-        alias vim nvim
-    end
+    # if type -q nvim
+    #     alias vim nvim
+    # end
 
     if type -q bass; and type -q brew
         set -l nvm_prefix (brew --prefix nvm 2>/dev/null)

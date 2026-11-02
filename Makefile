@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := install
-PACKAGES := git nvim ghostty fish tmux lazygit scripts
+PACKAGES := git nvim vim ghostty fish tmux lazygit scripts
 STOW := stow --restow --dir="$(CURDIR)" --target="$(HOME)"
 
 .PHONY: install sync
